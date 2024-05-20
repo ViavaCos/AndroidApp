@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     height: '90%',
     flex: 1,
     backgroundColor: 'skyblue',
-    padding: 12,
+    // padding: 12,
   }
 })
 

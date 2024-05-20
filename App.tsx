@@ -18,8 +18,9 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import {
   Colors,
@@ -36,27 +37,36 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-const HomeScreen = (props) => {
+const HomeScreen = (props: any) => {
+  //     setTimeout(() => {
+  //         alert(JSON.stringify(props))
+  //     }, 3000)
 
-//     setTimeout(() => {
-//         alert(JSON.stringify(props))
-//     }, 3000)
-
-    const handlePress = () => {
-        props.navigation.navigate("Mine", { mockData: 'mock~~' })
-    }
+  const handlePress = () => {
+    props.navigation.navigate('Mine', {mockData: 'mock~~'});
+  };
 
   return (
     <View>
       <Card showHeader={false}>
-        <View style={{ alignSelf: 'center', padding: 14, }}>
-          <Image style={{ width: 150, height: 200, resizeMode: 'stretch' }} source={require('./src/assets/flower.png')}></Image>
+        <View style={{alignSelf: 'center', padding: 14}}>
+          <Image
+            style={{width: 150, height: 200, resizeMode: 'stretch'}}
+            source={require('./src/assets/flower.png')}></Image>
         </View>
       </Card>
 
-      <Card showHeader={false} customCardStyle={{ marginTop: 10 }}>
-        <View style={{ alignSelf: 'center', padding: 14, marginTop: 10, overflow: 'hidden' }}>
-          <Image style={{ width: 150, height: 200, resizeMode: 'stretch' }} source={require('./src/assets/flower2.png')}></Image>
+      <Card showHeader={false} customCardStyle={{marginTop: 10}}>
+        <View
+          style={{
+            alignSelf: 'center',
+            padding: 14,
+            marginTop: 10,
+            overflow: 'hidden',
+          }}>
+          <Image
+            style={{width: 150, height: 200, resizeMode: 'stretch'}}
+            source={require('./src/assets/flower2.png')}></Image>
         </View>
       </Card>
 
@@ -64,17 +74,19 @@ const HomeScreen = (props) => {
         <Text>Mine</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 const MineScreen = () => {
-    return (
-        <View><Text>Im</Text></View>
-    )
-}
+  return (
+    <View>
+      <Text>Im</Text>
+    </View>
+  );
+};
 
-
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
+const Tabs = createBottomTabNavigator()
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -92,14 +104,39 @@ function App(): React.JSX.Element {
       <View
         style={{backgroundColor: 'pink', height: '100%', overflow: 'hidden'}}>
         <Layout>
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home'>
-              <Stack.Screen name='Home' component={HomeScreen} options={{ title: 'i am home' }} />
-              <Stack.Screen name='Mine' component={MineScreen} options={{ title: 'i am mine' }} />
+          {/* 路由跳转 */}
+          {/* <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{title: 'i am home'}}
+              />
+              <Stack.Screen
+                name="Mine"
+                component={MineScreen}
+                options={{title: 'i am mine'}}
+              />
             </Stack.Navigator>
+          </NavigationContainer> */}
+
+          {/* 底部导航页签切换 */}
+          <NavigationContainer>
+            <Tabs.Navigator screenOptions={{ headerShown: false }}>
+              <Tabs.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{title: 'Home', tabBarIcon: () => <Text>口</Text>}}
+              />
+              <Tabs.Screen
+                name="Mine"
+                component={MineScreen}
+                options={{title: 'Mine', tabBarIcon: () => <Text>口</Text>}}
+              />
+            </Tabs.Navigator>
           </NavigationContainer>
         </Layout>
-        <NavBar />
+        {/* <NavBar /> */}
       </View>
     </SafeAreaView>
   );
