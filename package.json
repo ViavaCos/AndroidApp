@@ -1,7 +1,8 @@
 {
-  "name": "xxxApp",
+  "name": "AndroidApp",
   "version": "0.0.1",
   "private": true,
+  "description": "Build with React-Native and run in Android platform.",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
