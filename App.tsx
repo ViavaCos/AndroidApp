@@ -33,13 +33,13 @@ import {
 import Layout from './src/components/Layout';
 import HomeScreen from './src/pages/Home';
 import MineScreen from './src/pages/Mine';
-
+import SvgIcon from './src/components/SvgIcon';
+import homeIcon from './src/assets/icons/home_active.svg'
+import mineIcon from './src/assets/icons/mine_active.svg'
+import { TABS_NAME } from './src/enums';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator()
-
-const homeIcon = require('./src/assets/icons/home_active.svg')
-const mineIcon = require('./src/assets/icons/mine.svg')
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -47,6 +47,23 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  /**
+   * 图标渲染
+   * @param tabName 页签名称
+   * @returns SvgIcon
+   */
+  const iconRender = (tabName: string) => {
+    if(tabName === TABS_NAME.HOME) {
+      return <SvgIcon svgFile={homeIcon} />
+    }
+
+    if(tabName === TABS_NAME.MINE) {
+      return <SvgIcon width={20} height={20} svgFile={mineIcon} />
+    }
+
+    return <SvgIcon svgFile={null} />
+  }
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -77,14 +94,14 @@ function App(): React.JSX.Element {
           <NavigationContainer>
             <Tabs.Navigator screenOptions={{ headerShown: false }}>
               <Tabs.Screen
-                name="Home"
+                name={TABS_NAME.HOME}
                 component={HomeScreen}
-                options={{title: 'Home', tabBarIcon: () => <Image style={{ width: 30, height: 30 }} source={homeIcon}></Image>}}
+                options={{title: TABS_NAME.HOME, tabBarIcon: () => iconRender(TABS_NAME.HOME)}}
               />
               <Tabs.Screen
-                name="Mine"
+                name={TABS_NAME.MINE}
                 component={MineScreen}
-                options={{title: 'Mine', tabBarIcon: () => <Text>口</Text>}}
+                options={{title: TABS_NAME.MINE, tabBarIcon: () => iconRender(TABS_NAME.MINE)}}
               />
             </Tabs.Navigator>
           </NavigationContainer>
