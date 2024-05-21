@@ -29,64 +29,17 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Card from './src/components/Card';
-import NavBar from './src/components/NavBar';
+// import NavBar from './src/components/NavBar';
 import Layout from './src/components/Layout';
+import HomeScreen from './src/pages/Home';
+import MineScreen from './src/pages/Mine';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-const HomeScreen = (props: any) => {
-  //     setTimeout(() => {
-  //         alert(JSON.stringify(props))
-  //     }, 3000)
-
-  const handlePress = () => {
-    props.navigation.navigate('Mine', {mockData: 'mock~~'});
-  };
-
-  return (
-    <View>
-      <Card showHeader={false}>
-        <View style={{alignSelf: 'center', padding: 14}}>
-          <Image
-            style={{width: 150, height: 200, resizeMode: 'stretch'}}
-            source={require('./src/assets/flower.png')}></Image>
-        </View>
-      </Card>
-
-      <Card showHeader={false} customCardStyle={{marginTop: 10}}>
-        <View
-          style={{
-            alignSelf: 'center',
-            padding: 14,
-            marginTop: 10,
-            overflow: 'hidden',
-          }}>
-          <Image
-            style={{width: 150, height: 200, resizeMode: 'stretch'}}
-            source={require('./src/assets/flower2.png')}></Image>
-        </View>
-      </Card>
-
-      <TouchableOpacity onPress={handlePress}>
-        <Text>Mine</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const MineScreen = () => {
-  return (
-    <View>
-      <Text>Im</Text>
-    </View>
-  );
-};
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator()
+
+const homeIcon = require('./src/assets/icons/home_active.svg')
+const mineIcon = require('./src/assets/icons/mine.svg')
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -126,7 +79,7 @@ function App(): React.JSX.Element {
               <Tabs.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{title: 'Home', tabBarIcon: () => <Text>口</Text>}}
+                options={{title: 'Home', tabBarIcon: () => <Image style={{ width: 30, height: 30 }} source={homeIcon}></Image>}}
               />
               <Tabs.Screen
                 name="Mine"
