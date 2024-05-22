@@ -3,6 +3,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native'
 
 import Card from '../../components/Card';
@@ -10,9 +11,9 @@ import Card from '../../components/Card';
 const HomeDetail = (props: any) => {
 
   return (
-    <View>
+    <View style={styles.HomeDetailWrap}>
       <Card showHeader={false}>
-        <View style={{alignSelf: 'center', padding: 14}}>
+        <View style={{alignSelf: 'center', padding: 6}}>
           <Text>HomeDetail</Text>
           <Image
             style={{width: 150, height: 200, resizeMode: 'stretch'}}
@@ -22,5 +23,11 @@ const HomeDetail = (props: any) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  HomeDetailWrap: {
+    padding: 12,
+  },
+})
 
 export default HomeDetail

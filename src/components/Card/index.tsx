@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = (props) => {
   const { showHeader = true, title, children, customCardStyle } = props;
 
   return (
-    <View style={[customCardStyle, styles.CardWarp]}>
+    <View style={[styles.CardWarp, customCardStyle]}>
       {
         showHeader && (
           <View style={styles.CardHead}>
