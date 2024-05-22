@@ -1,46 +1,25 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-} from 'react-native'
+import {createStackNavigator} from '@react-navigation/stack';
+import HomePage from './HomePage';
+import HomeDetail from './HomeDetail';
 
-import Card from '../../../src/components/Card';
+const Stack = createStackNavigator();
 
-const Home = (props: any) => {
-  const handlePress = () => {
-    props.navigation.navigate('Mine', {mockData: 'mock~~'});
-  };
-
+const HomeIndex = () => {
   return (
-    <View>
-      <Card showHeader={false}>
-        <View style={{alignSelf: 'center', padding: 14}}>
-          <Image
-            style={{width: 150, height: 200, resizeMode: 'stretch'}}
-            source={require('../../../src/assets/images/flower.png')}></Image>
-        </View>
-      </Card>
-
-      <Card showHeader={false} customCardStyle={{marginTop: 10}}>
-        <View
-          style={{
-            alignSelf: 'center',
-            padding: 14,
-            marginTop: 10,
-            overflow: 'hidden',
-          }}>
-          <Image
-            style={{width: 150, height: 200, resizeMode: 'stretch'}}
-            source={require('../../../src/assets/images/flower2.png')}></Image>
-        </View>
-      </Card>
-
-      <TouchableOpacity onPress={handlePress}>
-        <Text>Mine</Text>
-      </TouchableOpacity>
-    </View>
+    //  路由跳转
+    <Stack.Navigator initialRouteName="HomePage" screenOptions={{ headerShown: false }}>
+      <Stack.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{title: '首页'}}
+      />
+      <Stack.Screen
+        name="HomeDetail"
+        component={HomeDetail}
+        options={{title: '详情'}}
+      />
+    </Stack.Navigator>
   );
 };
 
-export default Home
+export default HomeIndex;

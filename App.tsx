@@ -17,10 +17,10 @@ import {
   View,
   Image,
   TouchableOpacity,
+  AppRegistry
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {
   Colors,
@@ -34,14 +34,13 @@ import Layout from './src/components/Layout';
 import HomeScreen from './src/pages/Home';
 import MineScreen from './src/pages/Mine';
 import SvgIcon from './src/components/SvgIcon';
-import homeIcon from './src/assets/icons/home_active.svg'
-import mineIcon from './src/assets/icons/mine_active.svg'
-import { TABS_NAME } from './src/enums';
+import homeIcon from './src/assets/icons/home_active.svg';
+import mineIcon from './src/assets/icons/mine_active.svg';
+import {TABS_NAME} from './src/enums';
 
-const Stack = createStackNavigator();
-const Tabs = createBottomTabNavigator()
+const Tabs = createBottomTabNavigator();
 
-function App(): React.JSX.Element {
+function App(props: any): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -54,16 +53,16 @@ function App(): React.JSX.Element {
    * @returns SvgIcon
    */
   const iconRender = (tabName: string) => {
-    if(tabName === TABS_NAME.HOME) {
-      return <SvgIcon svgFile={homeIcon} />
+    if (tabName === TABS_NAME.HOME) {
+      return <SvgIcon svgFile={homeIcon} />;
     }
 
-    if(tabName === TABS_NAME.MINE) {
-      return <SvgIcon width={20} height={20} svgFile={mineIcon} />
+    if (tabName === TABS_NAME.MINE) {
+      return <SvgIcon width={20} height={20} svgFile={mineIcon} />;
     }
 
-    return <SvgIcon svgFile={null} />
-  }
+    return <SvgIcon svgFile={null} />;
+  };
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -74,34 +73,24 @@ function App(): React.JSX.Element {
       <View
         style={{backgroundColor: 'pink', height: '100%', overflow: 'hidden'}}>
         <Layout>
-          {/* 路由跳转 */}
-          {/* <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-              <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{title: 'i am home'}}
-              />
-              <Stack.Screen
-                name="Mine"
-                component={MineScreen}
-                options={{title: 'i am mine'}}
-              />
-            </Stack.Navigator>
-          </NavigationContainer> */}
-
           {/* 底部导航页签切换 */}
           <NavigationContainer>
-            <Tabs.Navigator screenOptions={{ headerShown: false }}>
+            <Tabs.Navigator screenOptions={{headerShown: false}}>
               <Tabs.Screen
                 name={TABS_NAME.HOME}
                 component={HomeScreen}
-                options={{title: TABS_NAME.HOME, tabBarIcon: () => iconRender(TABS_NAME.HOME)}}
+                options={{
+                  title: TABS_NAME.HOME,
+                  tabBarIcon: () => iconRender(TABS_NAME.HOME),
+                }}
               />
               <Tabs.Screen
                 name={TABS_NAME.MINE}
                 component={MineScreen}
-                options={{title: TABS_NAME.MINE, tabBarIcon: () => iconRender(TABS_NAME.MINE)}}
+                options={{
+                  title: TABS_NAME.MINE,
+                  tabBarIcon: () => iconRender(TABS_NAME.MINE),
+                }}
               />
             </Tabs.Navigator>
           </NavigationContainer>
